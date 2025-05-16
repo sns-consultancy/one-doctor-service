@@ -1,10 +1,4 @@
-dotenv
-firebase_admin
-flask
-flask_cors
-requests
-
-# OneDoctorApp
+# One-Doctor-Service
 
 A backend API for securely storing and retrieving health data using Firebase Firestore.
 
@@ -32,8 +26,8 @@ A backend API for securely storing and retrieving health data using Firebase Fir
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/OneDoctorApp.git
-   cd OneDoctorApp
+   git clone https://github.com/sns-consultancy/one-doctor-service
+   cd one-doctor-service
    ```
 
 2. **Create and activate a virtual environment**
