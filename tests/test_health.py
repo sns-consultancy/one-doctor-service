@@ -93,7 +93,7 @@ class HealthApiTestCase(unittest.TestCase):
         self.assertIn('not found', response.get_json()['message'].lower())
 
     @patch('src.api.health.db')
-    def test_health_post_'missing_user_id(self, mock_db):
+    def test_health_post_missing_user_id(self, mock_db):
         # Missing user_id in payload
         data = {
             "heartbeat": 70,
