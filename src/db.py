@@ -67,5 +67,5 @@ else:
             db = MagicMock()
             logger.warning("Using mock database due to initialization failure")
         else:
-            # In production, re-raise the error
+            # In production, re-raise the  error
             raise
