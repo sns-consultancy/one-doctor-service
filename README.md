@@ -1,15 +1,39 @@
 # One-Doctor-Service
 
-A backend API for securely storing and retrieving health data using Firebase Firestore.
+A modular Flask backend API for securely storing and retrieving health data using Firebase Firestore.
 
 ---
 
 ## Features
 
 - REST API for health data (POST and GET)
-- API key authentication
+- API key authentication via environment variable
 - Firebase Firestore integration
 - CORS enabled
+- Modular, production-ready structure
+- Unit tests with mocking
+
+---
+
+## Project Structure
+
+```
+one-doctor-service/
+├── app.py
+├── src/
+│   ├── __init__.py
+│   ├── config.py
+│   ├── db.py
+│   ├── auth.py
+│   └── api/
+│       ├── __init__.py
+│       └── health.py
+├── tests/
+│   └── test_health.py
+├── requirements.txt
+├── .env
+└── ServiceAccountKey.json
+```
 
 ---
 
@@ -18,7 +42,6 @@ A backend API for securely storing and retrieving health data using Firebase Fir
 - Python 3.8+
 - [pip](https://pip.pypa.io/en/stable/)
 - [Firebase Service Account Key JSON](https://firebase.google.com/docs/admin/setup)
-- [Node.js and npm](https://nodejs.org/) (for frontend or Tailwind CSS, if needed)
 
 ---
 
@@ -44,13 +67,13 @@ A backend API for securely storing and retrieving health data using Firebase Fir
    ```
 
 4. **Add your Firebase service account key**
-   - Place your Firebase service account JSON file in the project directory (e.g., `serviceAccountKey.json`).
+   - Place your Firebase service account JSON file in the project root (e.g., `ServiceAccountKey.json`).
 
 5. **Set up environment variables**
    - Create a `.env` file in the project root:
      ```
      HEALTH_API_KEY=your-secret-api-key
-     FIRESTORE_SERVICE_ACCOUNT=serviceAccountKey.json
+     FIRESTORE_SERVICE_ACCOUNT=ServiceAccountKey.json
      ```
 
 ---
@@ -94,16 +117,34 @@ Retrieve health data for a user.
 
 ## Testing
 
-You can use [Postman](https://www.postman.com/) or `curl` to test the API.
-
-**Example:**
+Run all unit tests:
 
 ```bash
-curl -X POST http://127.0.0.1:5000/api/health \
-  -H "Content-Type: application/json" \
-  -H "x-api-key: your-secret-api-key" \
-  -d '{"user_id":"user123","heartbeat":72,"temperature":98.6,"blood_pressure":"120/80","oxygen_level":98,"last_updated":"2024-05-15T12:00:00Z"}'
+python -m unittest discover tests
 ```
+
+Tests use mocking for Firestore and API key validation.
+
+---
+
+## Deployment
+
+### Production (Waitress)
+
+```bash
+pip install waitress
+waitress-serve --port=8000 app:create_app
+```
+
+### Heroku
+
+1. Add a `Procfile`:
+   ```
+   web: waitress-serve --port=$PORT app:create_app
+   ```
+2. Add `waitress` to `requirements.txt`.
+3. Set environment variables in Heroku dashboard or CLI.
+4. If needed, store your Firebase key as a config var and write it to a file at runtime.
 
 ---
 
@@ -111,8 +152,10 @@ curl -X POST http://127.0.0.1:5000/api/health \
 
 - Make sure your Firebase project is set up and Firestore is enabled.
 - Never commit your `.env` or service account key to public repositories.
+- For frontend or Tailwind CSS, see the frontend repo (if applicable).
 
 ---
 
 ## License
+
 sns-consultancy
