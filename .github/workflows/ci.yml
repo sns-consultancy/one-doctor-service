@@ -29,4 +29,4 @@ jobs:
 
     - name: ✅ Run tests
       run: |
-        pytest tests/  # Or use `python -m unittest discover` if using unittest
+        python -m unittest discover
