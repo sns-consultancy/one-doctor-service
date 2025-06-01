@@ -34,5 +34,6 @@ jobs:
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
       run: |
+        git fetch --prune --unshallow
         git remote add heroku https://heroku:${HEROKU_API_KEY}@git.heroku.com/one-doctor-service.git
-        git push heroku HEAD:main -f        
+        git push heroku HEAD:main -f       
