@@ -30,6 +30,9 @@ jobs:
     - name: ✅ Run tests
       run: |
         python -m unittest discover
+      env:
+        FLASK_ENV: testing
+        HEALTH_API_KEY: test_api_key
     - name: 🚀 Deploy to Heroku
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
