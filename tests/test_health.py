@@ -10,6 +10,10 @@ from app import create_app
 
 class HealthApiTestCase(unittest.TestCase):
     def setUp(self):
+        # Patch Firestore db before each test
+        patcher = patch('src.api.health.db', new=MagicMock())
+        self.mock_db = patcher.start()
+        self.addCleanup(patcher.stop)
         self.app = create_app().test_client()
         self.headers = {"x-api-key": "test_api_key"}
 
