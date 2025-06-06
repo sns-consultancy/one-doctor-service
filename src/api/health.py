@@ -1,6 +1,7 @@
 from flask import Blueprint, request, jsonify
 from src.db import db
 from src.auth import require_api_key
+
 import logging
 
 health_bp = Blueprint('health', __name__)
