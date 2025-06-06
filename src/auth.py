@@ -2,7 +2,7 @@ import logging
 from functools import wraps
 from flask import request, jsonify
 from src.config import API_KEY
-
+from firebase_admin import firestore
 def require_api_key(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
