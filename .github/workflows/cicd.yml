@@ -3,8 +3,8 @@
 name: CI/CD Pipeline
 
 on:
-  push:
-    branches: [ feature* ]
+  # push:
+  #   branches: [ feature* ]
   pull_request:
     branches: [ master, develop ]
 
@@ -40,6 +40,6 @@ jobs:
       run: |
         git fetch --prune --unshallow || true
         if ! git remote | grep heroku; then
-          git remote add heroku https://heroku:${HEROKU_API_KEY}@git.heroku.com/one-doctor-service.git
+        git remote add heroku https://heroku:${HEROKU_API_KEY}@git.heroku.com/one-doctor-service.git
         fi
-        git push heroku HEAD:master -f
+        git push heroku HEAD:refs/heads/master -f
