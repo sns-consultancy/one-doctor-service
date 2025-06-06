@@ -36,7 +36,7 @@ def create_app():
         
         # IMPORTANT CHANGE: Remove the /auth prefix from blueprint registration
         # since it's already included in your route definitions
-        app.register_blueprint(authentication_bp, url_prefix='')
+        app.register_blueprint(authentication_bp, url_prefix='/api')
         
         @app.errorhandler(500)
         def handle_500(e):

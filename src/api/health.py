@@ -5,7 +5,7 @@ import logging
 
 health_bp = Blueprint('health', __name__)
 
-@health_bp.route('/api/health', methods=['POST'])
+@health_bp.route('/health', methods=['POST'])
 @require_api_key
 def receive_health_data():
     data = request.json
@@ -23,7 +23,7 @@ def receive_health_data():
     except Exception as e:
         return jsonify({'status': 'error', 'message': str(e)}), 500
 
-@health_bp.route('/api/health/<user_id>', methods=['GET'])
+@health_bp.route('/health/<user_id>', methods=['GET'])
 @require_api_key
 def get_health_data(user_id):
     try:
